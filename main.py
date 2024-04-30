@@ -5,14 +5,15 @@ from tkinter import messagebox
 #Window option
 window = Tk()
 window.title("Weather App")
-window.geometry("280x200")
+window.geometry("260x200")
 FONT = ("Arial", 12, "bold")
 
-def clear_label(weather_label=""):
-    weather_label.after(1000, weather_label.destroy())
+def clear_label():
+    weather_label.destroy()
 
 
 def show_weather():
+    global weather_label
     api_key = "f5eccd1935e67301b2a710abbce7876b"
     weather_location = enter_city.get()
     if weather_location == "":
@@ -25,6 +26,7 @@ def show_weather():
         print(weather_data.json())
 
         try:
+
             weather_status = weather_data.json()['weather'][0]['description']
             weather_temp = weather_data.json()["main"]["temp"]
             weather_temp = int(weather_temp)
@@ -40,15 +42,15 @@ def show_weather():
 
 
 button_show = Button(text="Show Weather", command=show_weather)
-button_show.place(x=20, y=150)
+button_show.place(x=70, y=150)
 
 clear_button = Button(text="Clear", command=clear_label)
-clear_button.place(x=110, y=150)
+clear_button.place(x=160, y=150)
 
 weather_text = Label(text="City Name", font=FONT)
-weather_text.place(x=20, y=2)
+weather_text.place(x=90, y=2)
 
 enter_city = Entry()
-enter_city.place(x=10, y=30)
+enter_city.place(x=65, y=30)
 
 mainloop()
